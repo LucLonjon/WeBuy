@@ -1,6 +1,9 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('data_user', {
+var DataTypes = require('sequelize/lib/data-types');
+const db = require('./database');
+
+class DataUser extends Sequelize.Model {}
+DataUser.init({
     id_user: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -24,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-    sequelize,
+    sequelize : db,
     tableName: 'data_user',
     timestamps: false,
     indexes: [
@@ -38,4 +41,8 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
-};
+
+
+  module.exports.DataUser = DataUser;
+
+  db.sync();
