@@ -19,8 +19,9 @@ app.get('/', (req, res) => {
   })
 
 
-  app.get('/user', (req, res) => {
-    getUserRqt.getAllUser((configurations, err) => {
+  app.get('/user/:id', (req, res) => {
+    const id = req.params.id;
+    getUserRqt.getUser(id,(configurations, err) => {
         res.json(configurations);
     });
 });

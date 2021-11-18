@@ -3,8 +3,8 @@ var DataTypes = require('sequelize/lib/data-types');
 const db = require('../database');
 
 
-function getAllUser(callback){
-    const query = DataUser.findByPk(1);
+function getUser(id,callback){
+    const query = DataUser.findByPk(id);
     if (callback) {
         return query.then(result => {
             callback(result);
@@ -13,6 +13,8 @@ function getAllUser(callback){
         return query;
     }
 }
+
+
 /*const query = DataUser.findAll({
     where: {
         id_user: {
@@ -28,4 +30,4 @@ function getAllUser(callback){
         return query;
     }
 }*/
-module.exports.getAllUser = getAllUser;
+module.exports.getUser = getUser;
