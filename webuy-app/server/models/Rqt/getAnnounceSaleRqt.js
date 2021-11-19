@@ -14,4 +14,17 @@ function getAnnonceSales(id,callback){
     }
 }
 
+function getAnnoncebyTitle(title,callback){
+    const query =  AnnonceSales.findAndCountAll({ where: { titre: title } });
+    if (callback) {
+        return query.then(result => {
+            callback(result);
+        });
+    } else {
+        return query;
+    }
+}
+
+
 module.exports.getAnnonceSales = getAnnonceSales;
+module.exports.getAnnoncebyTitle = getAnnoncebyTitle ;

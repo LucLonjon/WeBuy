@@ -22,15 +22,22 @@ app.get('/', (req, res) => {
 
   app.get('/user/:id', (req, res) => {
     const id = req.params.id;
-    getUserRqt.getUser(id,(configurations, err) => {
-        res.json(configurations);
+    getUserRqt.getUser(id,(resultat, err) => {
+        res.json(resultat);
     });
 });
 
 
   app.get('/annoncesales/:id', (req, res) => {
   const id = req.params.id;
-  getAnnounceSaleRqt.getAnnonceSales(id,(configurations, err) => {
-      res.json(configurations);
+  getAnnounceSaleRqt.getAnnonceSales(id,(resultat, err) => {
+      res.json(resultat);
+  });
+});
+
+  app.get('/annoncesales/title/:titre', (req, res) => {
+  const titre = req.params.titre;
+  getAnnounceSaleRqt.getAnnoncebyTitle(titre,(resultat, err) => {
+      res.json(resultat);
   });
 });
