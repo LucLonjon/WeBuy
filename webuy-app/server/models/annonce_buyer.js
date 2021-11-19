@@ -1,6 +1,9 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('annonce_buyer', {
+var DataTypes = require('sequelize/lib/data-types');
+const db = require('./database');
+
+class AnnonceBuyer extends Sequelize.Model {}
+AnnonceBuyer.init({
     idOffre: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -68,4 +71,6 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
-};
+
+  module.exports.AnnonceBuyer = AnnonceBuyer;
+  db.sync();

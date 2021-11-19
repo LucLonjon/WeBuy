@@ -4,6 +4,7 @@ const port = 3000
 const cors = require('cors');
 const Promise = require('sequelize').Promise;
 
+const getAnnounceSaleRqt = require('./models/Rqt/getAnnounceSaleRqt');
 const getUserRqt = require('./models/Rqt/getUserRqt');
 
 
@@ -24,4 +25,12 @@ app.get('/', (req, res) => {
     getUserRqt.getUser(id,(configurations, err) => {
         res.json(configurations);
     });
+});
+
+
+  app.get('/annoncesales/:id', (req, res) => {
+  const id = req.params.id;
+  getAnnounceSaleRqt.getAnnonceSales(id,(configurations, err) => {
+      res.json(configurations);
+  });
 });

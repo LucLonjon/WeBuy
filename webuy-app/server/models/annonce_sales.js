@@ -1,6 +1,9 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('annonce_sales', {
+var DataTypes = require('sequelize/lib/data-types');
+const db = require('./database');
+
+class AnnonceSales extends Sequelize.Model {}
+AnnonceSales.init({
     idAnnonce: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -36,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-    sequelize,
+    sequelize : db,
     tableName: 'annonce_sales',
     timestamps: false,
     indexes: [
@@ -57,4 +60,5 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
-};
+module.exports.AnnonceSales = AnnonceSales;
+db.sync();
