@@ -1,0 +1,26 @@
+.row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.home-img {
+  height: 100%;
+  width: 100%;
+}
+
+.column-container {
+  flex: 1 1 0px;
+}
+
+.column-container:hover {
+  opacity: 0.7;
+}
+
+.hide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

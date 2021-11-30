@@ -1,18 +1,24 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('categorie', {
+var DataTypes = require('sequelize/lib/data-types');
+const db = require('./database');
+
+class Categorie extends Sequelize.Model {}
+Categorie.init({
     idcategorie: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
+
     namecategorie: {
       type: DataTypes.STRING(50),
       allowNull: false
     }
-  }, {
-    sequelize,
+
+  },
+  {
+    sequelize : db,
     tableName: 'categorie',
     timestamps: false,
     indexes: [
@@ -25,5 +31,8 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
     ]
-  });
-};
+  }
+);
+
+module.exports.Categorie = Categorie;
+db.sync();
