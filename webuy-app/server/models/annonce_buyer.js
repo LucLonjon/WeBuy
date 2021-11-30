@@ -24,26 +24,18 @@ AnnonceBuyer.init({
     },
     message_achat: {
       type: DataTypes.STRING(50),
-      allowNull: true
+      allowNull: false
     },
-    id_user: {
-      type: DataTypes.INTEGER,
+    id_username: {
+      type: DataTypes.STRING(50),
       allowNull: false,
       references: {
         model: 'data_user',
-        key: 'id_user'
-      }
-    },
-    id_categorie: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'categorie',
-        key: 'idcategorie'
+        key: 'username'
       }
     }
   }, {
-    sequelize,
+    sequelize : db,
     tableName: 'annonce_buyer',
     timestamps: false,
     indexes: [
@@ -56,17 +48,10 @@ AnnonceBuyer.init({
         ]
       },
       {
-        name: "fk_annonce_buyer_id_user",
+        name: "fk_annonce_buyer_id_username",
         using: "BTREE",
         fields: [
-          { name: "id_user" },
-        ]
-      },
-      {
-        name: "id_categorie",
-        using: "BTREE",
-        fields: [
-          { name: "id_categorie" },
+          { name: "id_username" },
         ]
       },
     ]

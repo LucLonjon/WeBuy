@@ -1,7 +1,7 @@
 var DataTypes = require("sequelize").DataTypes;
 var _annonce_buyer = require("./annonce_buyer");
 var _annonce_sales = require("./annonce_sales");
-var _categorie = require("./categorie");
+var _categorie = require("../../../models/categorie");
 var _data_user = require("./data_user");
 
 function initModels(sequelize) {
@@ -12,12 +12,12 @@ function initModels(sequelize) {
 
   annonce_buyer.belongsTo(annonce_sales, { as: "idOffre_annonce_sale", foreignKey: "idOffre"});
   annonce_sales.hasOne(annonce_buyer, { as: "annonce_buyer", foreignKey: "idOffre"});
-  annonce_buyer.belongsTo(categorie, { as: "id_categorie_categorie", foreignKey: "id_categorie"});
-  categorie.hasMany(annonce_buyer, { as: "annonce_buyers", foreignKey: "id_categorie"});
-  annonce_buyer.belongsTo(data_user, { as: "id_user_data_user", foreignKey: "id_user"});
-  data_user.hasMany(annonce_buyer, { as: "annonce_buyers", foreignKey: "id_user"});
-  annonce_sales.belongsTo(data_user, { as: "id_user_data_user", foreignKey: "id_user"});
-  data_user.hasMany(annonce_sales, { as: "annonce_sales", foreignKey: "id_user"});
+  annonce_sales.belongsTo(categorie, { as: "id_categorie_categorie", foreignKey: "id_categorie"});
+  categorie.hasMany(annonce_sales, { as: "annonce_sales", foreignKey: "id_categorie"});
+  annonce_buyer.belongsTo(data_user, { as: "id_username_data_user", foreignKey: "id_username"});
+  data_user.hasMany(annonce_buyer, { as: "annonce_buyers", foreignKey: "id_username"});
+  annonce_sales.belongsTo(data_user, { as: "id_username_data_user", foreignKey: "id_username"});
+  data_user.hasMany(annonce_sales, { as: "annonce_sales", foreignKey: "id_username"});
 
   return {
     annonce_buyer,

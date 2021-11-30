@@ -1,6 +1,6 @@
-const DataUser = require('../data_user').DataUser;
+const DataUser = require('../models/data_user').DataUser;
 var DataTypes = require('sequelize/lib/data-types');
-const db = require('../database');
+const db = require('../models/database');
 
 
 function getUser(id,callback){
@@ -13,6 +13,7 @@ function getUser(id,callback){
         return query;
     }
 }
+
 
 
 /*const query = DataUser.findAll({

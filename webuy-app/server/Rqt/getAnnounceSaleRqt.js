@@ -1,6 +1,6 @@
-const AnnonceSales = require('../annonce_sales').AnnonceSales;
+const AnnonceSales = require('../models/annonce_sales').AnnonceSales;
 var DataTypes = require('sequelize/lib/data-types');
-const db = require('../database');
+const db = require('../models/database');
 
 
 function getAnnonceSales(id,callback){

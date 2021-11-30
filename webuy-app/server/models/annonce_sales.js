@@ -16,27 +16,35 @@ AnnonceSales.init({
     },
     description: {
       type: DataTypes.STRING(50),
-      allowNull: true
+      allowNull: false
     },
     prix_vente: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    id_user: {
-      type: DataTypes.INTEGER,
+    id_username: {
+      type: DataTypes.STRING(50),
       allowNull: false,
       references: {
         model: 'data_user',
-        key: 'id_user'
+        key: 'username'
       }
     },
     photo: {
       type: DataTypes.STRING(50),
-      allowNull: true
+      allowNull: false
     },
     state: {
       type: DataTypes.STRING(50),
       allowNull: false
+    },
+    id_categorie: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'categorie',
+        key: 'idcategorie'
+      }
     }
   }, {
     sequelize : db,
@@ -52,10 +60,17 @@ AnnonceSales.init({
         ]
       },
       {
-        name: "fk_annonce_sales_id_user",
+        name: "fk_annonce_sales_id_username",
         using: "BTREE",
         fields: [
-          { name: "id_user" },
+          { name: "id_username" },
+        ]
+      },
+      {
+        name: "fk_annonce_sales_id_categorie",
+        using: "BTREE",
+        fields: [
+          { name: "id_categorie" },
         ]
       },
     ]

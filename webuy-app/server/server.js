@@ -3,41 +3,44 @@ const app = express()
 const port = 3000
 const cors = require('cors');
 const Promise = require('sequelize').Promise;
+//const errorHandler = require('_middleware/error-handler');
 
-const getAnnounceSaleRqt = require('./models/Rqt/getAnnounceSaleRqt');
-const getUserRqt = require('./models/Rqt/getUserRqt');
+const getAnnounceSaleRqt = require('./Rqt/getAnnounceSaleRqt');
+const getUserRqt = require('./Rqt/getUserRqt');
 
 
 app.use(express.json())
 app.use(cors())
+app.use('/users', require('./users/users.controller'));
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
   })
   
-  app.listen(port, () => {
+app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
   })
 
 
-  app.get('/user/:id', (req, res) => {
+  app.get('/data/user/:id', (req, res) => {
     const id = req.params.id;
-    getUserRqt.getUser(id,(resultat, err) => {
-        res.json(resultat);
+    getUserRqt.getUser(id,(id_user, err) => {
+        res.json(id_user);
     });
 });
 
-
-  app.get('/annoncesales/:id', (req, res) => {
+  app.get('/data/annoncesales/:id', (req, res) => {
   const id = req.params.id;
   getAnnounceSaleRqt.getAnnonceSales(id,(resultat, err) => {
       res.json(resultat);
   });
 });
 
-  app.get('/annoncesales/title/:titre', (req, res) => {
+  app.get('/data/annoncesales/title/:titre', (req, res) => {
   const titre = req.params.titre;
   getAnnounceSaleRqt.getAnnoncebyTitle(titre,(resultat, err) => {
       res.json(resultat);
   });
 });
+
+

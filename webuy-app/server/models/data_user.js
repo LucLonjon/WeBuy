@@ -4,9 +4,8 @@ const db = require('./database');
 
 class DataUser extends Sequelize.Model {}
 DataUser.init({
-    id_user: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
+    username: {
+      type: DataTypes.STRING(50),
       allowNull: false,
       primaryKey: true
     },
@@ -22,10 +21,18 @@ DataUser.init({
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    mdp: {
+    adresse: {
       type: DataTypes.STRING(50),
       allowNull: false
-    }
+    },
+    hash: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
   }, {
     sequelize : db,
     tableName: 'data_user',
@@ -36,7 +43,7 @@ DataUser.init({
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id_user" },
+          { name: "username" },
         ]
       },
     ]
