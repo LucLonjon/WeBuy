@@ -1,33 +1,46 @@
 const express = require('express');
 const app = express()
 const port = 3000
+const cors = require('cors');
 const Promise = require('sequelize').Promise;
+//const errorHandler = require('_middleware/error-handler');
 
-//sequelize
-const { Sequelize } = require('sequelize');
+const getAnnounceSaleRqt = require('./Rqt/getAnnounceSaleRqt');
+const getUserRqt = require('./Rqt/getUserRqt');
 
-//Connection
-const sequelize = new Sequelize("db_webuy", "root", "root", {
-    dialect: "mysql",
-    host: "localhost"
-});
 
+app.use(express.json())
+app.use(cors())
+app.use('/users', require('./users/users.controller'));
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
   })
   
-  app.listen(port, () => {
+app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
   })
-  
 
-try {
-    sequelize.authenticate();
-    console.log('Connecté à la base de données MySQL!');
-    sequelize.query("SELECT * from data_user").then(([results, metadata]) => {
-        console.log(results);
-      })
-  } catch (error) {
-    console.error('Impossible de se connecter, erreur suivante :', error);
-  }
+
+  app.get('/data/user/:id', (req, res) => {
+    const id = req.params.id;
+    getUserRqt.getUser(id,(id_user, err) => {
+        res.json(id_user);
+    });
+});
+
+  app.get('/data/annoncesales/:id', (req, res) => {
+  const id = req.params.id;
+  getAnnounceSaleRqt.getAnnonceSales(id,(resultat, err) => {
+      res.json(resultat);
+  });
+});
+
+  app.get('/data/annoncesales/title/:titre', (req, res) => {
+  const titre = req.params.titre;
+  getAnnounceSaleRqt.getAnnoncebyTitle(titre,(resultat, err) => {
+      res.json(resultat);
+  });
+});
+
+
