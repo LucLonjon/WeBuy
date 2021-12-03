@@ -9,6 +9,8 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class AnnoncesComponent implements OnInit {
 
+
+
   annonces = [
     {
       produit: "Iphone SE",
@@ -48,6 +50,7 @@ export class AnnoncesComponent implements OnInit {
 
 
   ngOnInit(): void {
+
 
     
  

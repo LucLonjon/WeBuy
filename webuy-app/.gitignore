@@ -41,6 +41,9 @@ yarn-error.log
 testem.log
 /typings
 
+#db conf
+/server/models/database.js
+
 # System Files
 .DS_Store
 Thumbs.db

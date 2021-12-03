@@ -48,6 +48,21 @@ UNLOCK TABLES;
 -- Table structure for table `annonce_sales`
 --
 
+DROP TABLE IF EXISTS `categorie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `categorie` (
+  `idcategorie` int(11) NOT NULL AUTO_INCREMENT,
+  `namecategorie` varchar(50) NOT NULL,
+  PRIMARY KEY (`idcategorie`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categorie`
+--
+
+
 DROP TABLE IF EXISTS `annonce_sales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
@@ -81,19 +96,6 @@ UNLOCK TABLES;
 -- Table structure for table `categorie`
 --
 
-DROP TABLE IF EXISTS `categorie`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `categorie` (
-  `idcategorie` int(11) NOT NULL AUTO_INCREMENT,
-  `namecategorie` varchar(50) NOT NULL,
-  PRIMARY KEY (`idcategorie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `categorie`
---
 
 LOCK TABLES `categorie` WRITE;
 /*!40000 ALTER TABLE `categorie` DISABLE KEYS */;

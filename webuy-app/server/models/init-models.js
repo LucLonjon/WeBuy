@@ -5,9 +5,10 @@ var _categorie = require("../../../models/categorie");
 var _data_user = require("./data_user");
 
 function initModels(sequelize) {
+  var categorie = _categorie(sequelize, DataTypes);
   var annonce_buyer = _annonce_buyer(sequelize, DataTypes);
   var annonce_sales = _annonce_sales(sequelize, DataTypes);
-  var categorie = _categorie(sequelize, DataTypes);
+  
   var data_user = _data_user(sequelize, DataTypes);
 
   annonce_buyer.belongsTo(annonce_sales, { as: "idOffre_annonce_sale", foreignKey: "idOffre"});
@@ -20,9 +21,9 @@ function initModels(sequelize) {
   data_user.hasMany(annonce_sales, { as: "annonce_sales", foreignKey: "id_username"});
 
   return {
+    categorie,
     annonce_buyer,
     annonce_sales,
-    categorie,
     data_user,
   };
 }
