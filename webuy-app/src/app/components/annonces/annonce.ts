@@ -1,6 +1,6 @@
 export class Annonce {
 
-    id: string;
+    idAnnonce: string;
 
     titre: string;
 
