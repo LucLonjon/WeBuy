@@ -25,6 +25,20 @@ function getAnnoncebyTitle(title,callback){
     }
 }
 
+function getAllAnnounce(callback){
+    const query = AnnonceSales.findAll();
+    if (callback)
+    {
+        return query.then(result => {
+            callback(result);
+        });
+    } 
+    else {
+        return query;
+    }
+    
+}
 
 module.exports.getAnnonceSales = getAnnonceSales;
 module.exports.getAnnoncebyTitle = getAnnoncebyTitle ;
+module.exports.getAllAnnounce = getAllAnnounce ;

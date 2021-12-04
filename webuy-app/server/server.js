@@ -41,6 +41,11 @@ app.listen(port, () => {
   getAnnounceSaleRqt.getAnnoncebyTitle(titre,(resultat, err) => {
       res.json(resultat);
   });
-  
-});
 
+  app.get('/data/annoncesales/title/', (req, res) => {
+  const titre = req.params.titre;
+  getAnnounceSaleRqt.getAllAnnounce((resultat, err) => {
+        res.json(resultat);
+    });
+  });
+});
