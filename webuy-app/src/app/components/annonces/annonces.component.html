@@ -10,8 +10,8 @@
         <li *ngFor="let annonce of annonces">
         <div class="card">
           <img src="/assets/s21.jpg" alt="Samsung S21">
-          <h1>{{ annonce.produit }}</h1>
-          <p class="price">{{ annonce.prix }}{{ annonce.currency }}</p>
+          <h1>{{ annonce.titre }}</h1>
+          <p class="price">{{ annonce.prix }}€</p>
           <p>{{ annonce.description }}</p>
           <p><button class = "offer-button" mat-button (click)="openDialog()">Faire une offre</button></p>
         </div>

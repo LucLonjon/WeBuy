@@ -58,4 +58,3 @@ AnnonceBuyer.init({
   });
 
   module.exports.AnnonceBuyer = AnnonceBuyer;
-  db.sync();

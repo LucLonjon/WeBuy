@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 const cors = require('cors');
 const Promise = require('sequelize').Promise;
-//const errorHandler = require('_middleware/error-handler');
+
 
 const getAnnounceSaleRqt = require('./Rqt/getAnnounceSaleRqt');
 const getUserRqt = require('./Rqt/getUserRqt');
@@ -41,6 +41,6 @@ app.listen(port, () => {
   getAnnounceSaleRqt.getAnnoncebyTitle(titre,(resultat, err) => {
       res.json(resultat);
   });
+  
 });
-
 

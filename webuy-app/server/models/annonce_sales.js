@@ -75,5 +75,5 @@ AnnonceSales.init({
       },
     ]
   });
+  
 module.exports.AnnonceSales = AnnonceSales;
-db.sync();

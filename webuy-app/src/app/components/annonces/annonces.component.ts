@@ -1,6 +1,7 @@
 import {Component, OnInit } from '@angular/core';
-import { Double } from 'bson';
 import {MatDialog} from '@angular/material/dialog';
+import { Annonce } from './annonce';
+import { AnnoncesService } from './annonces.service';
 
 @Component({
   selector: 'app-annonces',
@@ -10,35 +11,9 @@ import {MatDialog} from '@angular/material/dialog';
 export class AnnoncesComponent implements OnInit {
 
 
+  annonces: Annonce[];
 
-  annonces = [
-    {
-      produit: "Iphone SE",
-      prix: "3,95", 
-      currency: "€",
-      description: "Description Iphone",
-      
-    },{
-    
-    produit: "Iphone SE",
-    prix: "3,95", 
-    currency: "€",
-    description: "Description Iphone",
-    },
-    {
-      produit: "Iphone SE",
-      prix: "3,95", 
-      currency: "€",
-      description: "Description Iphone",
-      },
-    
-  ]
-
-  map = new Map<String, String>();
-  title = new String();
-
-
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private annoncesService: AnnoncesService) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(MakeAnOfferDialog);
@@ -50,9 +25,12 @@ export class AnnoncesComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-
     
+    this.annoncesService.findAll().subscribe(data => {
+      this.annonces = data;
+    })
+    
+
  
   }
 }

@@ -14,6 +14,7 @@ import { VendreComponent } from './components/vendre/vendre.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
+import { AnnoncesService } from './components/annonces/annonces.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AnnoncesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
