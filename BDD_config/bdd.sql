@@ -26,15 +26,12 @@ CREATE TABLE `annonce_buyer` (
   `idOffre` int(11) NOT NULL AUTO_INCREMENT,
   `idAnnonce` int(11) NOT NULL,
   `prix_achat` int(11) NOT NULL,
-  `message_achat` varchar(50) DEFAULT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_categorie` int(11) NOT NULL,
+  `message_achat` varchar(50) NOT NULL,
+  `id_username` varchar(50) NOT NULL,
   PRIMARY KEY (`idOffre`),
-  KEY `fk_annonce_buyer_id_user` (`id_user`),
-  KEY `id_categorie` (`id_categorie`),
-  CONSTRAINT `annonce_buyer_ibfk_1` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`idcategorie`),
+  KEY `fk_annonce_buyer_id_username` (`id_username`),
   CONSTRAINT `fk_annonce_buyer_idOffre` FOREIGN KEY (`idOffre`) REFERENCES `annonce_sales` (`idannonce`),
-  CONSTRAINT `fk_annonce_buyer_id_user` FOREIGN KEY (`id_user`) REFERENCES `data_user` (`id_user`)
+  CONSTRAINT `fk_annonce_buyer_id_username` FOREIGN KEY (`id_username`) REFERENCES `data_user` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,20 +48,38 @@ UNLOCK TABLES;
 -- Table structure for table `annonce_sales`
 --
 
+DROP TABLE IF EXISTS `categorie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `categorie` (
+  `idcategorie` int(11) NOT NULL AUTO_INCREMENT,
+  `namecategorie` varchar(50) NOT NULL,
+  PRIMARY KEY (`idcategorie`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categorie`
+--
+
+
 DROP TABLE IF EXISTS `annonce_sales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `annonce_sales` (
   `idAnnonce` int(11) NOT NULL AUTO_INCREMENT,
   `titre` varchar(50) NOT NULL,
-  `description` varchar(50) DEFAULT NULL,
+  `description` varchar(50) NOT NULL,
   `prix_vente` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `photo` varchar(50) DEFAULT NULL,
+  `id_username` varchar(50) NOT NULL,
+  `photo` varchar(50) NOT NULL,
   `state` varchar(50) NOT NULL,
+  `id_categorie` int(11) NOT NULL,
   PRIMARY KEY (`idAnnonce`),
-  KEY `fk_annonce_sales_id_user` (`id_user`),
-  CONSTRAINT `fk_annonce_sales_id_user` FOREIGN KEY (`id_user`) REFERENCES `data_user` (`id_user`)
+  KEY `fk_annonce_sales_id_username` (`id_username`),
+  KEY `fk_annonce_sales_id_categorie` (`id_categorie`),
+  CONSTRAINT `fk_annonce_sales_id_categorie` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`idcategorie`),
+  CONSTRAINT `fk_annonce_sales_id_username` FOREIGN KEY (`id_username`) REFERENCES `data_user` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -81,19 +96,6 @@ UNLOCK TABLES;
 -- Table structure for table `categorie`
 --
 
-DROP TABLE IF EXISTS `categorie`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `categorie` (
-  `idcategorie` int(11) NOT NULL AUTO_INCREMENT,
-  `namecategorie` varchar(50) NOT NULL,
-  PRIMARY KEY (`idcategorie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `categorie`
---
 
 LOCK TABLES `categorie` WRITE;
 /*!40000 ALTER TABLE `categorie` DISABLE KEYS */;
@@ -108,13 +110,15 @@ DROP TABLE IF EXISTS `data_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `data_user` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `mail` varchar(50) NOT NULL,
-  `mdp` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `adresse` varchar(50) NOT NULL,
+  `hash` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +127,7 @@ CREATE TABLE `data_user` (
 
 LOCK TABLES `data_user` WRITE;
 /*!40000 ALTER TABLE `data_user` DISABLE KEYS */;
-INSERT INTO `data_user` VALUES (1,'Rébecca','Armand','test@mail.com','test');
+INSERT INTO `data_user` VALUES ('rebc','Rébecca','Armand','test@mail.com','test_adresse','hash_value','passreb'),('reboulgreg','reboul','gregoire','greg@gmail.com','test','$2a$10$okq/Wq1TtZOfDUVgxIHT6efQKzW8vtXIP0hZFLaQyMhOBpDHDyWxi','reboulgreg');
 /*!40000 ALTER TABLE `data_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -136,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-16 10:56:55
+-- Dump completed on 2021-11-30 12:22:05

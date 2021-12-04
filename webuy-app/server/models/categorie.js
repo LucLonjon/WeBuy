@@ -35,4 +35,3 @@ Categorie.init({
 );
 
 module.exports.Categorie = Categorie;
-db.sync();

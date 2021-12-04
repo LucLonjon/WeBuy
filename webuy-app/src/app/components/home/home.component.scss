@@ -17,10 +17,16 @@
 .column-container:hover {
   opacity: 0.7;
 }
-
+/**
 .hide {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+**/
+.home-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

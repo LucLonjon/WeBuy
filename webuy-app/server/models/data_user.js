@@ -1,5 +1,8 @@
 const Sequelize = require('sequelize');
 var DataTypes = require('sequelize/lib/data-types');
+const { AnnonceBuyer } = require('./annonce_buyer');
+const { AnnonceSales } = require('./annonce_sales');
+const { Categorie } = require('./categorie');
 const db = require('./database');
 
 class DataUser extends Sequelize.Model {}
@@ -52,4 +55,7 @@ DataUser.init({
 
   module.exports.DataUser = DataUser;
 
-  db.sync();
+  Categorie.sync();
+  DataUser.sync();
+  AnnonceSales.sync();
+  AnnonceBuyer.sync();

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Double } from 'bson';
+import {Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import { Annonce } from './annonce';
+import { AnnoncesService } from './annonces.service';
 
 @Component({
   selector: 'app-annonces',
@@ -8,27 +10,32 @@ import { Double } from 'bson';
 })
 export class AnnoncesComponent implements OnInit {
 
-  map = new Map<String, String>();
-  title = new String();
 
+  annonces: Annonce[];
 
-constructor(){
-  
+  constructor(public dialog: MatDialog, private annoncesService: AnnoncesService) {}
 
-    this.map.forEach((value: String, key: String) => {
-        console.log(key, value);
+  openDialog() {
+    const dialogRef = this.dialog.open(MakeAnOfferDialog);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
     });
-}
 
-
-getKeys(map: any[]){
-    return Array.from(map.keys());
-}
-
-  ngOnInit(): void {
-
-
-    this.title = "test";
   }
 
+
+  ngOnInit(): void {
+    
+    this.annoncesService.findAll().subscribe(data => {
+      this.annonces = data;
+    })
+    
+
+ 
+  }
 }
+
+@Component({
+  selector: 'offer-dialog',
+  templateUrl: 'offer-dialog.html',
+}) export class MakeAnOfferDialog {}
