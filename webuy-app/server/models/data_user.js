@@ -36,10 +36,19 @@ DataUser.init({
       type: DataTypes.STRING(50),
       allowNull: false
     },
+    
   }, {
     sequelize : db,
     tableName: 'data_user',
     timestamps: false,
+    defaultScope: {
+      // exclude hash by default
+          attributes: { exclude: ['hash'] }
+      },
+      scopes: {
+          // include hash with this scope
+          withHash: { attributes: {}, }
+      },
     indexes: [
       {
         name: "PRIMARY",
@@ -50,7 +59,8 @@ DataUser.init({
         ]
       },
     ]
-  });
+  }
+);;
 
 
   module.exports.DataUser = DataUser;

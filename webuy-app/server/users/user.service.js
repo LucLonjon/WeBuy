@@ -16,14 +16,15 @@ module.exports = {
 
 async function authenticate({ username, password }) {
     const user = await DataUser.scope('withHash').findOne({ where: { username } });
-
     if (!user || !(await bcrypt.compare(password, user.hash)))
         throw 'Username or password is incorrect';
 
     // authentication successful
+    console.log("test");
     const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
     return { ...omitHash(user.get()), token };
 }
+
 
 async function getAll() {
     return await DataUser.findAll();

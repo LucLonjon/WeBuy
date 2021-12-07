@@ -3,19 +3,18 @@ var DataTypes = require('sequelize/lib/data-types');
 const db = require('../models/database');
 
 
-function getAnnonceSales(id,callback){
+async function getAnnonceSales(id,callback){
     const query = AnnonceSales.findByPk(id);
     if (callback) {
-        return query.then(result => {
-            callback(result);
-        });
+        const result = await query;
+        callback(result);
     } else {
         return query;
     }
 }
 
-function getAnnoncebyTitle(title,callback){
-    const query =  AnnonceSales.findAndCountAll({ where: { titre: title } });
+async function getAnnoncebyUser(username,callback){
+    const query =  AnnonceSales.findAndCountAll({ where: { id_username: username } });
     if (callback) {
         return query.then(result => {
             callback(result);
@@ -25,6 +24,32 @@ function getAnnoncebyTitle(title,callback){
     }
 }
 
+
+
+async function getAnnoncebyTitle(title,callback){
+    const query =  AnnonceSales.findAndCountAll({ where: { titre: title } });
+    if (callback) {
+        const result = await query;
+        callback(result);
+    } else {
+        return query;
+    }
+}
+
+async function getAllAnnounce(callback){
+    const query = AnnonceSales.findAll();
+    if (callback)
+    {
+        const result = await query;
+        callback(result);
+    } 
+    else {
+        return query;
+    }
+    
+}
 
 module.exports.getAnnonceSales = getAnnonceSales;
 module.exports.getAnnoncebyTitle = getAnnoncebyTitle ;
+module.exports.getAllAnnounce = getAllAnnounce ;
+module.exports.getAnnoncebyUser = getAnnoncebyUser;

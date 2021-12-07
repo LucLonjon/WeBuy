@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express()
-const port = 3000
+const port = 8080
 const cors = require('cors');
 const Promise = require('sequelize').Promise;
 
-
+const authorize = require('./_middleware/authorize')
 const getAnnounceSaleRqt = require('./Rqt/getAnnounceSaleRqt');
-const getUserRqt = require('./Rqt/getUserRqt');
+const postAnnounceSaleRqt = require('./Rqt/postAnnounceSaleRqt');
 
 
 app.use(express.json())
@@ -22,25 +22,44 @@ app.listen(port, () => {
   })
 
 
-  app.get('/data/user/:id', (req, res) => {
-    const id = req.params.id;
-    getUserRqt.getUser(id,(id_user, err) => {
-        res.json(id_user);
+
+  app.get('/api/annoncesales/:id', (req, res) => {
+  const id = req.params.id;
+  getAnnounceSaleRqt.getAnnonceSales(id,(resultat, err) => {
+    if (err) throw err;
+      res.json(resultat);
+  });
+});
+
+  app.get('/annonce/:titre', (req, res) => {
+  const titre = req.params.titre;
+  getAnnounceSaleRqt.getAnnoncebyTitle(titre,(resultat, err) => {
+    if (err) throw err;
+      res.json(resultat);
+  });
+});
+
+  app.get('/annonces' ,(req, res) => {
+  const titre = req.params.titre;
+  getAnnounceSaleRqt.getAllAnnounce((resultat, err) => {
+      if (err) throw err;
+        res.json(resultat);
     });
 });
 
-  app.get('/data/annoncesales/:id', (req, res) => {
-  const id = req.params.id;
-  getAnnounceSaleRqt.getAnnonceSales(id,(resultat, err) => {
-      res.json(resultat);
+  app.post('/annonces/create', function (request, res) {
+    console.log(request.body.titre, request.body.description, request.body.prix_vente, request.body.id_username,
+      request.body.photo,request.body.state,request.body.id_categorie);
+    postAnnounceSaleRqt.postAnnonceSales(request.body.titre, request.body.description, request.body.prix_vente, request.body.id_username,
+    request.body.photo,request.body.state,request.body.id_categorie,(resultat, err) => {
+      if (err) throw err;
+        res.json(resultat);
+    });
   });
-});
 
-  app.get('/data/annoncesales/title/:titre', (req, res) => {
-  const titre = req.params.titre;
-  getAnnounceSaleRqt.getAnnoncebyTitle(titre,(resultat, err) => {
-      res.json(resultat);
+  app.post('/annonces/delete', function (request, res) {
+    postAnnounceSaleRqt.deleteAnnonceSalesTitle(request.body.titre,request.body.id_username,(resultat,err) => {
+      if (err) throw err;
+        res.json(resultat);
+    });
   });
-  
-});
-

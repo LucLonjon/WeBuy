@@ -1,9 +1,9 @@
-const BuyerOffer = require('../annonce_sales').AnnonceBuyer;
+const BuyerOffer = require('../models/annonce_buyer').AnnonceBuyer;
 var DataTypes = require('sequelize/lib/data-types');
 const db = require('../models/database');
 
 
-function getBuyerOffer(id,callback){
+async function getBuyerOffer(id,callback){
     const query =  BuyerOffer.findByPk(id);
     if (callback) {
         return query.then(result => {
@@ -14,10 +14,9 @@ function getBuyerOffer(id,callback){
     }
 }
 
-module.exports.getBuyerOffer = getBuyerOffer;
-/*
-function getOfferbyUser(title,callback){
-    const query =  AnnonceSales.findAndCountAll({ where: { titre: title } });
+
+async function getBuyerAllOffer(callback){
+    const query =  BuyerOffer.findAll();
     if (callback) {
         return query.then(result => {
             callback(result);
@@ -25,4 +24,19 @@ function getOfferbyUser(title,callback){
     } else {
         return query;
     }
-}*/
+}
+
+async function getOfferbyUser(username,callback){
+    const query =  BuyerOffer.findAndCountAll({ where: { id_username: username } });
+    if (callback) {
+        return query.then(result => {
+            callback(result);
+        });
+    } else {
+        return query;
+    }
+}
+
+module.exports.getBuyerOffer = getBuyerOffer;
+module.exports.getBuyerAllOffer = getBuyerAllOffer;
+module.exports.getOfferbyUser = getOfferbyUser;
