@@ -54,12 +54,11 @@ app.listen(port, () => {
     request.body.photo,request.body.state,request.body.id_categorie,(resultat, err) => {
       if (err) throw err;
         res.json(resultat);
-        console.log("error")
     });
   });
 
   app.post('/annonces/delete', function (request, res) {
-    postAnnounceSaleRqt.deleteAnnonceSales(request.body.titre,request.body.id_username,(resultat,err) => {
+    postAnnounceSaleRqt.deleteAnnonceSalesTitle(request.body.titre,request.body.id_username,(resultat,err) => {
       if (err) throw err;
         res.json(resultat);
     });

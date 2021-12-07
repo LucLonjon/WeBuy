@@ -18,19 +18,19 @@ async function postAnnonceSales(titre,description,prix_vente,id_username,photo,s
 
 module.exports.postAnnonceSales = postAnnonceSales;
 
-function deleteAnnonce(id, callback){
+function deleteAnnonceSales(id, callback){
     return AnnonceSales.destroy({ where: { idAnnonce: id } }).then(result => {
         if (callback)
         callback(result > 0);
     });
 }
 
-module.exports.deleteAnnonce = deleteAnnonce;
+module.exports.deleteAnnonceSales = deleteAnnonceSales;
 
-async function deleteAnnonceSales(titre,username,callback){
+async function deleteAnnonceSalesTitle(titre,username,callback){
     return AnnonceSales.findOne({ where: { id_username: username , titre : titre} }).then(result => {
         if(result){
-            deleteAnnonce(result.idAnnonce, (res) => {
+            deleteAnnonceSales(result.idAnnonce, (res) => {
                 if (callback)
                 callback(res);
             })
@@ -43,6 +43,6 @@ async function deleteAnnonceSales(titre,username,callback){
 
 }
 
-module.exports.deleteAnnonceSales = deleteAnnonceSales ;
+module.exports.deleteAnnonceSalesTitle = deleteAnnonceSalesTitle ;
 
 
