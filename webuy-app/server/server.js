@@ -4,7 +4,7 @@ const port = 8080
 const cors = require('cors');
 const Promise = require('sequelize').Promise;
 
-
+const authorize = require('./_middleware/authorize')
 const getAnnounceSaleRqt = require('./Rqt/getAnnounceSaleRqt');
 const postAnnounceSaleRqt = require('./Rqt/postAnnounceSaleRqt');
 
@@ -37,7 +37,7 @@ app.listen(port, () => {
   });
 });
 
-  app.get('/annonces', (req, res) => {
+  app.get('/annonces' ,(req, res) => {
   const titre = req.params.titre;
   getAnnounceSaleRqt.getAllAnnounce((resultat, err) => {
         res.json(resultat);
