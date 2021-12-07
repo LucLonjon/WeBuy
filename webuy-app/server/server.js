@@ -6,12 +6,12 @@ const Promise = require('sequelize').Promise;
 
 
 const getAnnounceSaleRqt = require('./Rqt/getAnnounceSaleRqt');
-//const postAnnounceSaleRqt = require('./Rqt/postAnnounceSaleRqt');
+const postAnnounceSaleRqt = require('./Rqt/postAnnounceSaleRqt');
 
 
 app.use(express.json())
 app.use(cors())
-
+app.use('/users', require('./users/users.controller'));
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -30,25 +30,26 @@ app.listen(port, () => {
   });
 });
 
-  app.get('/api/annoncesales/:titre', (req, res) => {
+  app.get('/annonce/:titre', (req, res) => {
   const titre = req.params.titre;
   getAnnounceSaleRqt.getAnnoncebyTitle(titre,(resultat, err) => {
       res.json(resultat);
   });
 });
 
-  app.get('/api/annonces', (req, res) => {
+  app.get('/annonces', (req, res) => {
   const titre = req.params.titre;
   getAnnounceSaleRqt.getAllAnnounce((resultat, err) => {
         res.json(resultat);
     });
 });
 
-/*
-  app.post('/api/createAnnounce', function (request, response) {
-    postAnnounceSaleRqt.postAnnonceSales(request.titre, request.body.description, request.body.prix_vente, request.body.id_username,
+  app.post('/annonces/create', function (request, response) {
+    console.log(request.body.titre, request.body.description, request.body.prix_vente, request.body.id_username,
+      request.body.photo,request.body.state,request.body.id_categorie);
+    postAnnounceSaleRqt.postAnnonceSales(request.body.titre, request.body.description, request.body.prix_vente, request.body.id_username,
     request.body.photo,request.body.state,request.body.id_categorie,(result, err) => {
       if (err) throw err;
-      res.json(result);
+        //res.json(result);
     });
-  });*/
+  });
