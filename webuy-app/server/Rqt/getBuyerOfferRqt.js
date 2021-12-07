@@ -27,7 +27,7 @@ async function getBuyerAllOffer(callback){
 }
 
 async function getOfferbyUser(username,callback){
-    const query =  AnnonceSales.findAndCountAll({ where: { id_username: username } });
+    const query =  BuyerOffer.findAndCountAll({ where: { id_username: username } });
     if (callback) {
         return query.then(result => {
             callback(result);
@@ -39,4 +39,4 @@ async function getOfferbyUser(username,callback){
 
 module.exports.getBuyerOffer = getBuyerOffer;
 module.exports.getBuyerAllOffer = getBuyerAllOffer;
-module.exports.getOfferbyUser = getOfferbyUse;
+module.exports.getOfferbyUser = getOfferbyUser;

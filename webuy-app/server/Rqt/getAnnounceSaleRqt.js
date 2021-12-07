@@ -13,6 +13,17 @@ async function getAnnonceSales(id,callback){
     }
 }
 
+async function getAnnoncebyUser(username,callback){
+    const query =  AnnonceSales.findAndCountAll({ where: { id_username: username } });
+    if (callback) {
+        return query.then(result => {
+            callback(result);
+        });
+    } else {
+        return query;
+    }
+}
+
 
 
 async function getAnnoncebyTitle(title,callback){
@@ -41,3 +52,4 @@ async function getAllAnnounce(callback){
 module.exports.getAnnonceSales = getAnnonceSales;
 module.exports.getAnnoncebyTitle = getAnnoncebyTitle ;
 module.exports.getAllAnnounce = getAllAnnounce ;
+module.exports.getAnnoncebyUser = getAnnoncebyUser;
