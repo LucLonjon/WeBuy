@@ -2,11 +2,13 @@ export class User {
 
     username: String;
 
-    firstName: String;
+    prenom: String;
 
-    lastName: String;
+    nom: String;
 
     mail: String;
+
+    adresse: String;
 
     password: String;
     

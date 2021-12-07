@@ -4,6 +4,7 @@ import { Input, Component, Output, EventEmitter, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from './user.service';
+import { User } from './user';
 
 
 export interface DialogData {
@@ -45,17 +46,22 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   form: FormGroup = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
+    prenom: new FormControl(''),
+    nom: new FormControl(''),
+    mail: new FormControl(''),
     username: new FormControl(''),
     password: new FormControl(''),
+    adresse: new FormControl('')
   });
 
-  submit() {
-    if (this.form.valid) {
-      this.userService.save(this.form.value);
-    }
+  onSubmit() {
+      const userTest = this.form.value;
+      console.log(userTest);
+      this.userService.save(userTest).subscribe(data => {
+        const res = data;
+        console.log(data);
+      });
+      
   }
 
   @Output() submitEM = new EventEmitter();

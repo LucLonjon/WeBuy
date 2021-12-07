@@ -25,13 +25,9 @@ export class AnnoncesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
     this.annoncesService.findAll().subscribe(data => {
       this.annonces = data;
     })
-    
-
- 
   }
 }
 
