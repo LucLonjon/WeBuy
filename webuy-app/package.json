@@ -6,10 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@angular/animations": "~13.0.0",
     "@angular/cdk": "^13.0.3",
     "@angular/common": "~13.0.0",
@@ -20,12 +22,14 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "angular": "^1.8.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bulma": "^0.9.3",
     "express-jwt": "^6.1.0",
     "g": "^2.0.1",
     "joi": "^17.5.0",
+    "material": "^0.4.3",
     "mysql2": "^2.3.3",
     "rxjs": "~7.4.0",
     "sequelize": "^6.12.0-alpha.1",

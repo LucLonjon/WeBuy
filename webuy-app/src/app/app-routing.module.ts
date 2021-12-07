@@ -4,6 +4,7 @@ import { AnnoncesComponent } from './components/annonces/annonces.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { VendreComponent } from './components/vendre/vendre.component';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 
 const routes: Routes = [
   {
