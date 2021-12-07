@@ -51,5 +51,6 @@ app.listen(port, () => {
     request.body.photo,request.body.state,request.body.id_categorie,(result, err) => {
       if (err) throw err;
         //res.json(result);
+        console.log("error")
     });
   });
