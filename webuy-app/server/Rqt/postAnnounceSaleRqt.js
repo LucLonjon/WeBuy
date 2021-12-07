@@ -16,6 +16,33 @@ async function postAnnonceSales(titre,description,prix_vente,id_username,photo,s
     }
 }
 
-
-
 module.exports.postAnnonceSales = postAnnonceSales;
+
+function deleteAnnonce(id, callback){
+    return AnnonceSales.destroy({ where: { idAnnonce: id } }).then(result => {
+        if (callback)
+        callback(result > 0);
+    });
+}
+
+module.exports.deleteAnnonce = deleteAnnonce;
+
+async function deleteAnnonceSales(titre,username,callback){
+    return AnnonceSales.findOne({ where: { id_username: username , titre : titre} }).then(result => {
+        if(result){
+            deleteAnnonce(result.idAnnonce, (res) => {
+                if (callback)
+                callback(res);
+            })
+        } else {
+            if (callback)
+            callback(peripheral);
+        }
+    });
+    
+
+}
+
+module.exports.deleteAnnonceSales = deleteAnnonceSales ;
+
+
