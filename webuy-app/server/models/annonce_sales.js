@@ -40,7 +40,7 @@ AnnonceSales.init({
     },
     id_categorie: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'categorie',
         key: 'idcategorie'
