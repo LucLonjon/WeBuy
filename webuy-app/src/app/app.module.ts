@@ -24,6 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 const mat = [
@@ -39,7 +40,8 @@ const mat = [
   MatSelectModule,
   MatIconModule,
   MatRadioModule,
-  MatGridListModule
+  MatGridListModule,
+  MatSnackBarModule
 ];
 
 @NgModule({

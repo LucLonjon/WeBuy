@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const db = require('../models/database');
 const DataUser = require('../models/data_user').DataUser;
 var DataTypes = require('sequelize/lib/data-types');
+const { truncate } = require('fs');
 
 module.exports = {
     authenticate,
@@ -87,3 +88,4 @@ function omitHash(user) {
     const { hash, ...userWithoutHash } = user;
     return userWithoutHash;
 }
+

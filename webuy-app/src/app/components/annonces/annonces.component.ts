@@ -34,4 +34,7 @@ export class AnnoncesComponent implements OnInit {
 @Component({
   selector: 'offer-dialog',
   templateUrl: 'offer-dialog.html',
-}) export class MakeAnOfferDialog {}
+}) export class MakeAnOfferDialog {
+
+
+}

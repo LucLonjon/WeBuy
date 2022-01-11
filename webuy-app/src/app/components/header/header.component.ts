@@ -4,7 +4,9 @@ import { Input, Component, Output, EventEmitter, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from './user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from './user';
+import { Observable } from 'rxjs';
 
 
 export interface DialogData {
@@ -15,11 +17,12 @@ export interface DialogData {
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styles: []
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   openLoginDialog() {
     const dialogRef = this.dialog.open(LoginDialog);
@@ -42,7 +45,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<RegisterDialog>,
-    private userService: UserService
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    public loginDialog: MatDialog
   ) {}
 
   form: FormGroup = new FormGroup({
@@ -53,16 +58,33 @@ export class HeaderComponent implements OnInit {
     password: new FormControl(''),
     adresse: new FormControl('')
   });
-
+  
   onSubmit() {
-      const userTest = this.form.value;
-      console.log(userTest);
-      this.userService.save(userTest).subscribe(data => {
-        const res = data;
+      this.userService.save(this.form.value).subscribe(data => {
         console.log(data);
+        if (data = "Registration successful") {
+          this.openSnackBar("You've succefully registered", "Log In");
+          this.closeDialog();
+          this.onSnackBarAction();
+        }
       });
-      
   }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action,{
+      duration: 2000,
+    });
+  }
+
+  onSnackBarAction(){
+    this.snackBar._openedSnackBarRef?.onAction().subscribe(() => {
+      const dialogLogin = this.loginDialog.open(LoginDialog);
+    });
+    }
 
   @Output() submitEM = new EventEmitter();
 
@@ -77,6 +99,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialog>,
+    private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public registerDialog: MatDialog
   ) {}
@@ -88,7 +111,9 @@ export class HeaderComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
+      this.userService.logOn(this.form.controls['username'].value,this.form.controls['password'].value).subscribe(data => {
+        console.log(data);
+      });
     }
   }
 

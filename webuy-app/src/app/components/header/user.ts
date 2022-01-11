@@ -1,15 +1,17 @@
-export class User {
+import { Annonce } from "../annonces/annonce";
+
+export interface User {
 
     username: String;
 
-    prenom: String;
+    lastname: String;
 
-    nom: String;
+    firstname: String;
 
-    mail: String;
+    email: String;
 
     adresse: String;
 
     password: String;
-    
+
 }
