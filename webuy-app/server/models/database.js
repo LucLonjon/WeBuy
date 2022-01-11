@@ -9,7 +9,7 @@ const db = new Sequelize("db_webuy", "admin", "root",{
 });
 **/
 
-const db = new Sequelize("db_webuy", "root", "root",{
+const db = new Sequelize("db_webuy", "admin", "root",{
     dialect: "mysql",
     host: "localhost"
 });

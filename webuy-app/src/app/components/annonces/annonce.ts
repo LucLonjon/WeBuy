@@ -7,5 +7,4 @@ export class Annonce {
     description! : string;
 
     prix! : string;
-    
 }

@@ -25,17 +25,16 @@ export class AnnoncesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
     this.annoncesService.findAll().subscribe(data => {
       this.annonces = data;
     })
-    
-
- 
   }
 }
 
 @Component({
   selector: 'offer-dialog',
   templateUrl: 'offer-dialog.html',
-}) export class MakeAnOfferDialog {}
+}) export class MakeAnOfferDialog {
+
+
+}
