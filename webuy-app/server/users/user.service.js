@@ -22,7 +22,7 @@ async function authenticate({ username, password }) {
 
     // authentication successful
     console.log("test");
-    const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
+    const token = jwt.sign({ sub: user.username }, config.secret, { expiresIn: '7d' });
     return { ...omitHash(user.get()), token };
 }
 

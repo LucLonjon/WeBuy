@@ -11,7 +11,7 @@ import { AnnoncesService } from './annonces.service';
 export class AnnoncesComponent implements OnInit {
 
 
-  annonces: Annonce[];
+  annonces!: Annonce[];
 
   constructor(public dialog: MatDialog, private annoncesService: AnnoncesService) {}
 

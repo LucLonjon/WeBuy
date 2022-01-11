@@ -1,11 +1,10 @@
 export class Annonce {
 
-    idAnnonce: string;
+    idAnnonce!: string;
 
-    titre: string;
+    titre! : string;
 
-    description: string;
+    description! : string;
 
-    prix_vente: string;
-    
+    prix! : string;
 }
