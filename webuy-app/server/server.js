@@ -13,6 +13,8 @@ app.use(express.json())
 app.use(cors())
 app.use('/users', require('./users/users.controller'));
 app.use('/annonces',authorize());
+app.use('/annonces/create',authorize());
+app.use('/annonces/delete',authorize());
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
