@@ -22,9 +22,9 @@
 
 <code>npm start</code>
 
-retrouver l'application ici : <link>http://localhost:4200</link>
+Retrouvez l'application ici : <link>http://localhost:4200</link>
 
-# How to run cypress (run only if you run back and front already)
+# How to run cypress (requires running already)
 
 <code>./node_modules/.bin/cypress open</code>
 
