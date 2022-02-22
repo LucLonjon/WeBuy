@@ -14,4 +14,6 @@ export interface User {
 
     password: String;
 
+    token: string;
+
 }

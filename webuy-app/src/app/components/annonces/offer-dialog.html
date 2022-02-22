@@ -1,8 +1,19 @@
 <div class ="offer-dialog-window">
     <h2 class ="title-dialog" mat-dialog-title>Faites une offre !</h2>
-    <div class="product-details">
-        
+    <div class="offre-prix">
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Montant</mat-label>
+            <input matInput type="number" class="example-right-align" placeholder="0" [(ngModel)]="offre">
+            <span matPrefix>€&nbsp;</span>
+            <span matSuffix>.00</span>
+   
+   
+    
+    <div mat-dialog-actions class="boutons">
+        <button mat-button (click)="onNoClick()">Annuler</button>
+        <button mat-button [mat-dialog-close]="offre" cdkFocusInitial>Proposer</button>
     </div>
-</div>
+   
+
 
 

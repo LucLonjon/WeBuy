@@ -6,5 +6,5 @@ export class Annonce {
 
     description! : string;
 
-    prix! : string;
+    prix_vente! : string;
 }

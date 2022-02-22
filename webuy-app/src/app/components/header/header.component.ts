@@ -6,7 +6,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from './user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from './user';
-import { Observable } from 'rxjs';
 
 
 export interface DialogData {
@@ -20,15 +19,22 @@ export interface DialogData {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+    public userService: UserService) {}
   ngOnInit() {
+    console.log(this.isUserLoggedIn());
   }
 
+  isUserLoggedIn() {
+    return this.userService.isLoggedIn();
+    
+  }
   openLoginDialog() {
     const dialogRef = this.dialog.open(LoginDialog);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+
 }
 
 
@@ -97,11 +103,14 @@ export class HeaderComponent implements OnInit {
   styleUrls:['login.scss']
 }) export class LoginDialog {
 
+  user : User;
+
   constructor(
     public dialogRef: MatDialogRef<LoginDialog>,
     private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    public registerDialog: MatDialog
+    public registerDialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   form: FormGroup = new FormGroup({
@@ -112,13 +121,22 @@ export class HeaderComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       this.userService.logOn(this.form.controls['username'].value,this.form.controls['password'].value).subscribe(data => {
-        console.log(data);
+        this.user = data;
+        localStorage.setItem("id_token", this.user.token);
+        this.closeDialog();
+        this.openSnackBar("Hello " + this.user.username + " !", " ");
       });
     }
   }
 
   closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action,{
+      duration: 2000,
+    });
   }
 
 
