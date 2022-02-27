@@ -8,7 +8,7 @@ const authorize = require('./_middleware/authorize')
 const getAnnounceSaleRqt = require('./Rqt/getAnnounceSaleRqt');
 const postAnnounceSaleRqt = require('./Rqt/postAnnounceSaleRqt');
 const postOfferRqt = require('./Rqt/postOfferRqt');
-
+const getOfferRqt = require('./Rqt/getBuyerOfferRqt');
 
 app.use(express.json())
 app.use(cors())
@@ -77,3 +77,11 @@ app.listen(port, () => {
         res.json(resultat);
     });
   });
+
+ app.get('/annonces/offer/:username',(req, res) => {
+  const username = req.params.username;
+  getOfferRqt.getOfferbyUser(username,(resultat, err) => {
+      if (err) throw err;
+        res.json(resultat);
+    });
+});
