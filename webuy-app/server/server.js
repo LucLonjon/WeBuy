@@ -7,6 +7,7 @@ const Promise = require('sequelize').Promise;
 const authorize = require('./_middleware/authorize')
 const getAnnounceSaleRqt = require('./Rqt/getAnnounceSaleRqt');
 const postAnnounceSaleRqt = require('./Rqt/postAnnounceSaleRqt');
+const postOfferRqt = require('./Rqt/postOfferRqt');
 
 
 app.use(express.json())
@@ -15,6 +16,7 @@ app.use('/users', require('./users/users.controller'));
 //app.use('/annonces', authorize());
 app.use('/annonces/create',authorize());
 app.use('/annonces/delete',authorize());
+
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -62,6 +64,15 @@ app.listen(port, () => {
 
   app.post('/annonces/delete', function (request, res) {
     postAnnounceSaleRqt.deleteAnnonceSalesTitle(request.body.titre,request.body.id_username,(resultat,err) => {
+      if (err) throw err;
+        res.json(resultat);
+    });
+  });
+
+
+  app.post('/annonces/offer', function (request, res) {
+    console.log(request.body.id_annonce, request.body.prix_achat,request.body.message_achat,request.body.id_username);
+    postOfferRqt.postOffer(request.body.id_annonce, request.body.prix_achat,request.body.message_achat,request.body.id_username,(resultat, err) => {
       if (err) throw err;
         res.json(resultat);
     });
