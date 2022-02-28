@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/LucLonjon/WeBuy#readme",
   "dependencies": {
+    "all": "^0.0.0",
     "angular": "^1.8.2",
     "cors": "^2.8.5",
+    "cypress": "^9.5.0",
     "express": "^4.17.1",
     "mysql2": "^2.3.3",
     "sequelize": "^6.9.0"
