@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "3fb68945-c651-4939-b186-7547973eb0a8",
+		"name": "WeBuyCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"reboulgreg\",\r\n    \"password\" :  \"reboulgreg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAnnonceWithAuth",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Mzg4NjY5OTksImV4cCI6MTYzOTQ3MTc5OX0.gq7dKLLdlWJOMTKR1sVtrgc5Pv8QEz5iakWirXty8p",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/annonces",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"annonces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAnnonce",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"titre\": \"Voiture\",\r\n        \"id_username\": \"reboulgreg\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/annonces/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"annonces",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAnnonce",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"titre\": \"Voiture\",\r\n        \"description\": \"PORSCHE 3\",\r\n        \"prix_vente\": 20000,\r\n        \"id_username\": \"reboulgreg\",\r\n        \"photo\": \"url\",\r\n        \"state\": \"1\",\r\n        \"id_categorie\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/annonces/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"annonces",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostOffer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n        \"id_annonce\": 2,\r\n        \"prix_achat\": 150,\r\n        \"message_achat\": \"Bonjour\",\r\n        \"id_username\" : \"reboulgreg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/annonces/offer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"annonces",
+						"offer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
